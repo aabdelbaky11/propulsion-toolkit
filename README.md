@@ -1,0 +1,17 @@
+# propulsion-toolkit
+
+MATLAB tools for compressible flow and gas turbine cycle analysis.
+
+Self-directed project, July-August 2026.
+Abdelrahman Abdelbaky, Aerospace Engineering, Iowa State University.
+
+## Layout
+
+- `compressible/` - isentropic relations, shock solvers, nozzle flow
+- `cycle/` - turbojet and turbofan performance models
+- `validation/` - scripts reproducing published table data
+- `docs/` - assumptions, function reference, results
+
+## Status
+
+In progress. Day 1 of 20.
