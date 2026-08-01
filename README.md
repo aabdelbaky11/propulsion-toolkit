@@ -2,7 +2,7 @@
 
 MATLAB tools for compressible flow and gas turbine cycle analysis.
 
-Self-directed project, July-August 2026.
+Self-directed project, Summer 2026.
 Abdelrahman Abdelbaky, Aerospace Engineering, Iowa State University.
 
 ## Layout
@@ -14,4 +14,4 @@ Abdelrahman Abdelbaky, Aerospace Engineering, Iowa State University.
 
 ## Status
 
-In progress. Day 2 of 20.
+In progress. Day 3 of 20.

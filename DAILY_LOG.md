@@ -48,3 +48,25 @@ and loses p0.
 
 Confusing / to revisit:
 - I can get confused bt the notation at times, for exaple I am not 100% sure what the astrict* mean when it is on a T,P, or any of those values.
+
+## Day 3 - Sat Aug 1
+
+Read Anderson 3.6 (normal shock relations) and 3.7 (Hugoniot).
+Derived M2(M1) by hand once.
+
+Built normalShock.m - forward mode returns M2, p2/p1, T2/T1,
+rho2/rho1, p02/p01 from M1. Inverse mode recovers M1 from any
+of them using fzero. T2/T1 is computed from the perfect gas law
+rather than written out separately.
+
+validation/normalShock_check.m against Appendix B: max error
+0.0315%, PASS. Added physical checks swept over 400 Mach numbers -
+M2 always subsonic, p02/p01 always <= 1 and monotonically
+decreasing. Those catch things a 9-row table can't.
+
+The number that matters: p02/p01 = 0.72 at Mach 2, 0.33 at Mach 3.
+A single normal shock throws away most of your total pressure by
+Mach 3, which is why supersonic inlets use multiple oblique shocks.
+
+Confusing / to revisit:
+- Crazy how the higher the mach number before a shockwave, the smaller the mach number behind it becomes, it obviously is similar to how there is such a durastic drop in pressure, very hard to wrap my head around it at the moment. 
