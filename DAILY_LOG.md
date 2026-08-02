@@ -70,3 +70,25 @@ Mach 3, which is why supersonic inlets use multiple oblique shocks.
 
 Confusing / to revisit:
 - Crazy how the higher the mach number before a shockwave, the smaller the mach number behind it becomes, it obviously is similar to how there is such a durastic drop in pressure, very hard to wrap my head around it at the moment. 
+
+## Day 4 - Sun Aug 2
+
+Read Anderson 3.8 (Rayleigh, heat addition), 3.9 (Fanno, friction),
+and the 3.11 summary. Chapter 3 done.
+
+Main idea: thermal choking. Adding heat to a subsonic flow drives M
+toward 1, and at M = 1 the flow physically cannot accept more heat at
+that mass flow. That's a hard ceiling on combustor heat release,
+independent of how much fuel you're willing to burn. Same story for
+friction in Fanno flow.
+
+Built figures/fig_normalShock.m - first publication-quality figure.
+M2 and p02/p01 vs M1, annotated at Mach 2, exported at 300 DPI.
+The curves cross near M = 2.5: M2 flattens toward an asymptote
+around 0.38 while p02/p01 keeps collapsing. That gap is the
+argument for oblique-shock inlets.
+
+Block 1 complete. Three solvers, two validation scripts, one figure.
+
+Confusing / to revisit:
+- This was a massive chapter with a lot of derivations and new concepts, will definitly to to revist those to understand them better, the method of solving for conditions after the shockwave when accounting for heat addition and/or friction is also a pretty difficult algorithm, so will need to revist the solution method for that also. 
