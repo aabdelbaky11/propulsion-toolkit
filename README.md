@@ -14,4 +14,4 @@ Abdelrahman Abdelbaky, Aerospace Engineering, Iowa State University.
 
 ## Status
 
-In progress. Day 4 of 20.
+In progress. Day 5 of 20.

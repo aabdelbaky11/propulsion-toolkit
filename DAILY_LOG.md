@@ -92,3 +92,37 @@ Block 1 complete. Three solvers, two validation scripts, one figure.
 
 Confusing / to revisit:
 - This was a massive chapter with a lot of derivations and new concepts, will definitly to to revist those to understand them better, the method of solving for conditions after the shockwave when accounting for heat addition and/or friction is also a pretty difficult algorithm, so will need to revist the solution method for that also. 
+
+## Day 5 - Mon Aug 3
+
+Read Anderson 4.1-4.4. Oblique shocks are how supersonic flow
+executes a turn: the wave tilts to angle beta so that the normal
+velocity component is compressed while the tangential component
+passes through unchanged, and the vector sum comes out rotated
+by theta.
+
+Built obliqueShock.m. Solves the theta-beta-M relation backwards
+with fzero - theta(beta) is closed form, beta(theta) is not. The
+bracket selects the branch: below the peak of theta(beta) gives the
+weak root, above it gives the strong root. Once beta is known the
+function calls normalShock.m on M1*sin(beta). No shock algebra
+repeated.
+
+Detachment: above theta_max no attached solution exists and the
+function returns NaN with attached = false, rather than a wrong
+number.
+
+validation/obliqueShock_check.m - no appendix table exists for
+oblique shocks, so this verifies against invariants instead:
+reduction to the normal shock case at beta = 90 (exact, 0.00e+00),
+both roots honouring the requested theta, weak root always lower
+loss, strong root always subsonic behind, and theta_max against
+published values to 0.03%.
+
+At M = 2, theta = 20: weak gives beta = 53.4 and keeps 89% of p0,
+staying supersonic at M2 = 1.21. Strong gives beta = 74.3, keeps
+76%, goes subsonic. The strong solution is nearly a normal shock,
+which is why its loss is close to the 72% normal shock value.
+
+Confusing / to revisit:
+- The method of solving in Anderson is a little new to me, its more like thermo where you need to know what table to look and when you can actually use table values and when you cannot, definitely need to get used to that and become more familiar with solving these type of problems, normal and oblique shock waves.
