@@ -126,3 +126,40 @@ which is why its loss is close to the 72% normal shock value.
 
 Confusing / to revisit:
 - The method of solving in Anderson is a little new to me, its more like thermo where you need to know what table to look and when you can actually use table values and when you cannot, definitely need to get used to that and become more familiar with solving these type of problems, normal and oblique shock waves.
+
+## Day 6 - Tue Aug 4
+
+Read Anderson 4.14 (Prandtl-Meyer expansion) and 4.15 (shock-expansion
+theory).
+
+The contrast with Day 5 is the whole point. Flow turning into itself
+compresses through a single shock and loses total pressure. Flow
+turning away from itself expands through a fan of infinitely many
+infinitesimal Mach waves, each generating zero entropy, so p0 is
+conserved exactly. Compression can concentrate into a discontinuity;
+expansion cannot.
+
+Built prandtlMeyer.m with three modes: forward M -> nu and mu,
+inverse nu -> M via fzero, and expansion mode taking M1 plus a turn
+angle and returning the full downstream state. p02_p01 is hardcoded
+to 1 because there is no loss to compute. Property ratios go through
+the stagnation values, since p0 and T0 are both constant across the
+fan.
+
+nu has a hard ceiling of 130.45 deg for gamma = 1.4 as M -> Inf, so
+a flow at M1 can only turn nu_max - nu(M1). The function errors with
+all three numbers rather than returning garbage.
+
+validation/prandtlMeyer_check.m: max error 0.0005% against the table,
+the best of any solver so far since nu(M) is pure arctangents with no
+fractional powers. Round-trip 6.75e-14 over 1900 points. Additivity
+test passes at exactly 0.00e+00 - turning 10 then 20 gives the same
+M2 as turning 30 in one step, confirming nu is a state function.
+
+At M = 2 turning 20 deg: M2 = 2.83, p2/p1 = 0.275, p02/p01 = 1.
+Static pressure falls to 27% and nothing is lost - that drop is
+conversion to kinetic energy, not loss.
+
+Confusing / to revisit:
+- There was a lot of geomtry involved in expansion wave theory which can be overwhelming while trying to also understand a lot of new concepts, so I will definitely need to revisit a lot of the different geometric solutions and also the way of identifying specific angles.
+ 
