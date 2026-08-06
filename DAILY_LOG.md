@@ -163,3 +163,52 @@ conversion to kinetic energy, not loss.
 Confusing / to revisit:
 - There was a lot of geomtry involved in expansion wave theory which can be overwhelming while trying to also understand a lot of new concepts, so I will definitely need to revisit a lot of the different geometric solutions and also the way of identifying specific angles.
  
+## Day 7 - Thu Aug 6
+
+Read Anderson 4.6, 4.7, 4.12 and Farokhi 6.10-6.12, 6.14, 6.16.
+
+Built studies/inletRecovery.m - first script that is an argument
+rather than a solver. Chains obliqueShock and normalShock to compute
+total pressure recovery for external compression inlets at Mach 2.
+
+Results: pitot 0.7209, one 10 deg ramp 0.8662, two ramps 0.9549,
+three 8 deg ramps 0.9765.
+
+The insight is where the gain comes from. The oblique shocks
+themselves cost almost nothing - 0.8% each in the 3-ramp case. What
+they buy is a cheap terminal normal shock: at M = 1.13 it costs
+0.2%, versus 28% at M = 2.0. The ramps exist to set up the normal
+shock, not to do the compression.
+
+Diminishing returns are sharp: +20%, +12%, +3%. That is why real
+inlets stop at two or three ramps.
+
+My 0.9765 beats the MIL-E-5008B standard of 0.9250, which is not a
+better inlet - it is an inviscid model missing ramp friction,
+boundary layer bleed, subsonic diffuser loss, and cowl lip loss.
+The gap is roughly the size of what I left out.
+
+Figure: figures/inlet_recovery.png, recovery vs M0 for all four
+configs against the MIL standard. Each fixed-geometry curve ends
+where its shocks detach, which shows the variable geometry
+requirement visually.
+
+Chapter 4 complete.
+
+Confusing / to revisit:
+- Here's that as a log entry:
+
+Confusing / to revisit:
+- I can compute recovery for a ramp system but I do not have a clear
+  physical picture of the hardware. The code treats a "ramp" as an
+  abstract deflection angle. What is the actual geometry? On the SR-71
+  it is a translating conical spike; on Concorde it is hinged flat
+  plates in a rectangular duct. How does a 10 degree deflection map to
+  a physical surface, and where does the cowl lip sit relative to the
+  shocks?
+- Related: what is actually different between external, mixed, and
+  internal compression as built objects, not as shock diagrams? I
+  understand mixed compression puts some shocks inside the cowl, but
+  not what that looks like or why it makes unstart a risk.
+- Look at cutaway drawings of the SR-71 and Concorde inlets and trace
+  the shock structure onto the real geometry.
