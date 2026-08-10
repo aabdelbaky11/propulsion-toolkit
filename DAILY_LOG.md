@@ -212,3 +212,48 @@ Confusing / to revisit:
   not what that looks like or why it makes unstart a risk.
 - Look at cutaway drawings of the SR-71 and Concorde inlets and trace
   the shock structure onto the real geometry.
+
+## Day 8 - Mon Aug 10
+
+Read Anderson 5.1-5.3, quasi-1D flow and the area-Mach relation.
+
+Built areaMach.m. Forward gives A/A* from M; inverse solves back with
+a 'sub', 'sup', or 'both' branch. The relation has a minimum of 1 at
+M = 1 and rises on both sides, so every ratio above 1 has two roots.
+
+The hard part is the sonic point. At M = 1 the curve is flat, so the
+derivative vanishes and root-finding is ill-conditioned. Three
+defences: short-circuit to an exact answer at ratio = 1, anchor both
+brackets at exactly 1 so neither search can cross into the other
+branch, and grow the outer brackets adaptively so extreme area ratios
+still bracket properly. Verified to A/A* = 5e4.
+
+The physical point: geometry gives you A/A* but not which root you
+are on. Same nozzle, exit ratio 1.6875, could be running at M = 0.372
+or M = 2.000. Back pressure decides, not the hardware. Resolving that
+is tomorrow's job.
+
+validation/areaMach_check.m: max 0.0033% vs Appendix A, round-trips
+at 1e-14 on both branches, and exact 0.000e+00 agreement with the
+A_Astar field in isentropic.m over 199 points - two independent
+implementations of the same relation matching bit for bit.
+
+Confusing / to revisit:
+- The area-velocity relation still surprises me. Subsonic flow speeds up
+  in a converging duct, which matches intuition - squeeze a hose, water
+  goes faster. But supersonic flow speeds up in a DIVERGING duct, and
+  the same duct that accelerates one decelerates the other. The sign
+  flips at M = 1.
+- I can see it in the algebra: dA/A = (M^2 - 1) dV/V, so the sign of
+  (M^2 - 1) controls everything. What I want is the physical picture.
+  The answer is in the mass flow, rho*A*V = constant. When you
+  accelerate a flow, density drops. Below M = 1 density drops slower
+  than velocity rises, so area must shrink. Above M = 1 density drops
+  FASTER than velocity rises, so area must grow just to keep mass flow
+  constant. M = 1 is exactly the crossover where the two effects
+  balance.
+- So the diverging section of a nozzle is not pushing the flow. It is
+  giving the expanding gas room. That still does not feel intuitive and
+  I want to sit with it.
+- To revisit: work out d(rho)/rho = -M^2 dV/V by hand and confirm that
+  is where the M^2 comes from.
