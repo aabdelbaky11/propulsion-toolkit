@@ -257,3 +257,63 @@ Confusing / to revisit:
   I want to sit with it.
 - To revisit: work out d(rho)/rho = -M^2 dV/V by hand and confirm that
   is where the M^2 comes from.
+
+## Day 9 - Tue Aug 11
+
+Read Anderson 5.4 and Farokhi 6.21, 6.23, 6.28, 6.29.
+
+Built nozzleFlow.m - the biggest function in the toolkit. Takes an
+area distribution, p0, and back pressure, and returns the operating
+regime plus the full pressure, Mach, and stagnation pressure
+distribution along the nozzle.
+
+Six regimes: subsonic (not choked), choked-subsonic, shock-in-nozzle,
+overexpanded, design, underexpanded. The classification comes from
+three boundary pressure ratios the function computes from the area
+ratio alone. For A_e/A_t = 2.0 those are 0.9372, 0.5134, 0.0939.
+
+The hard part is shock-in-nozzle. The shock position is not given -
+it has to be found by root-finding on the condition p_exit = p_b.
+After the shock the flow has a new stagnation pressure AND a new
+sonic reference area A*, and both have to be recomputed or the mass
+flow stops balancing.
+
+Three things I did not expect:
+- The choking band is narrow (6% of pressure ratio) while the
+  shock-in-nozzle band is wide (43%). That is why nozzle behaviour
+  looks abrupt near choking and gradual after.
+- Overexpanded, design, and underexpanded have IDENTICAL internal
+  solutions. The difference is entirely outside the exit plane.
+- Lowering back pressure marches the shock downstream continuously.
+  It is one regime with a moving feature, not a set of discrete cases.
+
+validation/nozzleFlow_check.m verifies against physics, not tables,
+since no appendix tabulates this. Mass flow conserved to 1.84e-15 in
+every regime including across the shock - that is the check that
+would catch a bad A* recomputation. Shock solve reproduces pb to
+6e-16 over 25 cases. Regime classification correct on both sides of
+every boundary.
+
+Figure: figures/nozzle_regimes.png - nozzle contour above, six
+pressure distributions below, showing the shock marching downstream.
+
+Confusing / to revisit:
+- The A* recomputation after the shock is the part I understand least.
+  Before the shock A* is the physical throat area. After the shock the
+  flow is subsonic and never goes sonic again, so the new A* is a
+  reference area that does not correspond to any real station in the
+  nozzle. I coded it as As/areaMach(M2) and the mass flow check passes,
+  so it is right, but I want the physical reasoning to be as solid as
+  the arithmetic.
+- Related: why does A* have to change at all? T0 is unchanged across
+  the shock and the mass flow is unchanged, so what exactly is it that
+  makes the downstream flow need a bigger sonic reference area? I think
+  the answer is the p0 loss, but I want to see it fall out of the mass
+  flow equation rather than take it on faith.
+- The shock-in-nozzle regime being one continuous band rather than a
+  set of cases still surprises me. I had been picturing discrete
+  operating points, not a shock sliding down the nozzle as I turn a
+  knob.
+- To revisit: write out mdot in terms of p0, A*, and T0, and confirm
+  that holding mdot and T0 fixed while dropping p0 forces A* up by
+  exactly the factor 1/(p02/p01).
