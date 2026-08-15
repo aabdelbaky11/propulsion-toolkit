@@ -14,4 +14,13 @@ Abdelrahman Abdelbaky, Aerospace Engineering, Iowa State University.
 
 ## Status
 
-In progress. Day 9 of 20.
+Compressible flow toolkit complete ('v1.0-compressible,) 
+- seven validation functions, six validation scripts, full documentation. 
+Cycle analysis tool (turbojet, turbofan) in progress; resuming on weekends during the fall semester, God willing. 
+
+**Project 2 — Compressible Flow Toolkit: complete** (tag `v1.0-compressible`)
+Seven solvers, six verification scripts, all passing against Anderson's
+appendix tables to within 0.05%. See
+[`docs/compressible_toolkit.md`](docs/compressible_toolkit.md).
+
+Next: gas turbine cycle analysis.

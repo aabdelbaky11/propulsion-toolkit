@@ -317,3 +317,37 @@ Confusing / to revisit:
 - To revisit: write out mdot in terms of p0, A*, and T0, and confirm
   that holding mdot and T0 fixed while dropping p0 forces A* up by
   exactly the factor 1/(p02/p01).
+
+## Day 10 - Wed Aug 12
+
+Project 2 wrap. Ran all six validation scripts, collected results.
+Max errors: isentropic 0.0295%, normal shock 0.0315%, Prandtl-Meyer
+0.0005%, area-Mach 0.0033%. Oblique shock and nozzle flow pass on
+invariants since neither is tabulated.
+
+Wrote docs/compressible_toolkit.md - scope, assumptions, function
+reference, verification results, figures, and limitations. The
+section I care most about is the distinction between verifying the
+implementation and validating the model. The tables come from the
+same equations I coded, so agreement proves the algebra is right,
+not that the physics matches reality. Day 16's engine comparison is
+the one that tests the model.
+
+Tagged v1.0-compressible.
+
+## Pause — Aug 15
+
+Days 1–10 complete, Project 2 tagged v1.0-compressible. Traveling for Umrah
+Aug 16–24; Day 11 not started.
+
+Picking up at Day 11 (thrust and performance parameters, Farokhi Ch. 3) on
+weekends starting September. Days 11–16 target one 3-hr session per weekend,
+Project 1 wrap by mid-October.
+
+Where I left off: nothing broken. All seven compressible functions pass their
+validation scripts. Next action is reading Farokhi Ch. 3 and deriving the
+uninstalled thrust equation from a control volume by hand.
+
+Confusing / to revisit:
+- Nothing outstanding from Block 2. Re-skim docs/compressible_toolkit.md before
+  starting Day 11 to reload station numbering conventions.
